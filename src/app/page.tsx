@@ -1,11 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import Modal from '@/components/Modal';
 import Survey from '@/components/Survey';
 import { useRouter } from 'next/navigation';
-import giftcardImage from '@/images/giftcard.png';
 
 export default function Home() {
   const router = useRouter();

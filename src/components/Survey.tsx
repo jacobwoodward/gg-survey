@@ -129,7 +129,7 @@ export default function Survey({ onComplete }: SurveyProps) {
             <h2 className="text-2xl font-medium mb-2">Which best describes you?</h2>
             <p className="text-zinc-400">This helps us ask the right questions.</p>
           </div>
-          <div className="grid gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {personas.map((persona) => (
               <button
                 key={persona.id}
