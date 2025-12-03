@@ -3,10 +3,10 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Share Your Perspective",
-  description: "Help us understand what's broken and how to fix it together.",
+  description: "Help me understand what's broken and how to fix it together.",
   openGraph: {
     title: "Share Your Perspective",
-    description: "Help us understand what's broken and how to fix it together.",
+    description: "Help me understand what's broken and how to fix it together.",
     images: [
       {
         url: "/og-image.png",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Share Your Perspective",
-    description: "Help us understand what's broken and how to fix it together.",
+    description: "Help me understand what's broken and how to fix it together.",
     images: ["/og-image.png"],
   },
 };
