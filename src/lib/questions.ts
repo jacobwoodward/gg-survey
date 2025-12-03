@@ -170,6 +170,12 @@ export const personas: Persona[] = [
         ],
         required: true,
       },
+      {
+        id: 'student_open_ended',
+        text: 'When you think about your professional network, what feels broken or missing?',
+        type: 'text',
+        required: false,
+      },
     ],
   },
   {
@@ -320,6 +326,12 @@ export const personas: Persona[] = [
         ],
         required: true,
       },
+      {
+        id: 'mentor_open_ended',
+        text: 'When you think about your professional network, what feels broken or missing?',
+        type: 'text',
+        required: false,
+      },
     ],
   },
   {
@@ -465,6 +477,12 @@ export const personas: Persona[] = [
           'I would if there was a good reason',
         ],
         required: true,
+      },
+      {
+        id: 'employer_open_ended',
+        text: 'When you think about your professional network, what feels broken or missing?',
+        type: 'text',
+        required: false,
       },
     ],
   },
@@ -622,6 +640,12 @@ export const personas: Persona[] = [
         ],
         required: true,
       },
+      {
+        id: 'program_open_ended',
+        text: 'When you think about your professional network, what feels broken or missing?',
+        type: 'text',
+        required: false,
+      },
     ],
   },
   {
@@ -775,6 +799,12 @@ export const personas: Persona[] = [
           'I would if there was a good reason',
         ],
         required: true,
+      },
+      {
+        id: 'coach_open_ended',
+        text: 'When you think about your professional network, what feels broken or missing?',
+        type: 'text',
+        required: false,
       },
     ],
   },
@@ -957,6 +987,12 @@ export const personas: Persona[] = [
           'I would if there was a good reason',
         ],
         required: true,
+      },
+      {
+        id: 'general_open_ended',
+        text: 'When you think about your professional network, what feels broken or missing?',
+        type: 'text',
+        required: false,
       },
     ],
   },
