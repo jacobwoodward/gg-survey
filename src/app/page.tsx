@@ -26,7 +26,7 @@ export default function Home() {
               Help Build Something Better
             </h1>
             <p className="text-lg sm:text-xl text-zinc-400 text-balance">
-              We&apos;re talking to people who are tired of waiting for someone else to fix what&apos;s broken. Your perspective matters.
+              I&apos;m talking to people who are tired of waiting for someone else to fix what&apos;s broken. Your perspective matters.
             </p>
           </div>
 
