@@ -1,14 +1,24 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Modal from '@/components/Modal';
 import Survey from '@/components/Survey';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function Home() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [isSurveyOpen, setIsSurveyOpen] = useState(false);
+  const [initialPersonaId, setInitialPersonaId] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    const persona = searchParams.get('persona');
+    if (persona) {
+      setInitialPersonaId(persona);
+      setIsSurveyOpen(true);
+    }
+  }, [searchParams]);
 
   const handleSurveyComplete = () => {
     setIsSurveyOpen(false);
@@ -175,7 +185,7 @@ export default function Home() {
         title="Share your perspective"
       >
         <div className="p-6">
-          <Survey onComplete={handleSurveyComplete} />
+          <Survey onComplete={handleSurveyComplete} initialPersonaId={initialPersonaId} />
         </div>
       </Modal>
     </main>

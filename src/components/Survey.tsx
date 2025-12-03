@@ -14,11 +14,15 @@ interface UserInfo {
 
 interface SurveyProps {
   onComplete: () => void;
+  initialPersonaId?: string;
 }
 
-export default function Survey({ onComplete }: SurveyProps) {
-  const [step, setStep] = useState<SurveyStep>('persona');
-  const [selectedPersona, setSelectedPersona] = useState<Persona | null>(null);
+export default function Survey({ onComplete, initialPersonaId }: SurveyProps) {
+  const initialPersona = initialPersonaId
+    ? personas.find(p => p.id === initialPersonaId) || null
+    : null;
+  const [step, setStep] = useState<SurveyStep>(initialPersona ? 'info' : 'persona');
+  const [selectedPersona, setSelectedPersona] = useState<Persona | null>(initialPersona);
   const [userInfo, setUserInfo] = useState<UserInfo>({
     name: '',
     email: '',
@@ -90,7 +94,7 @@ export default function Survey({ onComplete }: SurveyProps) {
   };
 
   const handleBack = () => {
-    if (step === 'info') {
+    if (step === 'info' && !initialPersona) {
       setStep('persona');
       setSelectedPersona(null);
     } else if (step === 'questions' && currentQuestionIndex > 0) {
@@ -211,13 +215,15 @@ export default function Survey({ onComplete }: SurveyProps) {
           </div>
 
           <div className="flex gap-3 pt-4">
-            <button
-              type="button"
-              onClick={handleBack}
-              className="px-6 py-3 rounded-xl border border-white/10 hover:bg-white/5 transition-colors"
-            >
-              Back
-            </button>
+            {!initialPersona && (
+              <button
+                type="button"
+                onClick={handleBack}
+                className="px-6 py-3 rounded-xl border border-white/10 hover:bg-white/5 transition-colors"
+              >
+                Back
+              </button>
+            )}
             <button
               type="submit"
               className="flex-1 px-6 py-3 rounded-xl bg-white text-black font-medium hover:bg-zinc-200 transition-colors"
