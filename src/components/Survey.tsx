@@ -51,10 +51,9 @@ export default function Survey({ onComplete }: SurveyProps) {
     setResponses((prev) => ({ ...prev, [currentQuestion.id]: value }));
   };
 
-  const canProceed = () => {
+  const hasAnswer = () => {
     if (!currentQuestion) return false;
     const answer = responses[currentQuestion.id];
-    if (!currentQuestion.required) return true;
     if (Array.isArray(answer)) return answer.length > 0;
     return answer !== undefined && answer !== '';
   };
@@ -257,12 +256,13 @@ export default function Survey({ onComplete }: SurveyProps) {
             </button>
             <button
               onClick={handleNext}
-              disabled={!canProceed()}
-              className="flex-1 px-6 py-3 rounded-xl bg-white text-black font-medium hover:bg-zinc-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex-1 px-6 py-3 rounded-xl bg-white text-black font-medium hover:bg-zinc-200 transition-colors"
             >
               {currentQuestionIndex === (selectedPersona?.questions.length ?? 0) - 1
                 ? 'Submit'
-                : 'Next'}
+                : hasAnswer()
+                  ? 'Next'
+                  : 'Skip this question'}
             </button>
           </div>
         </div>
