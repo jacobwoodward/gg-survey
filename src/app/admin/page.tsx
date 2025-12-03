@@ -14,10 +14,19 @@ interface SurveyResponse {
   created_at: string;
 }
 
+interface WaitlistEntry {
+  id: number;
+  name: string;
+  email: string;
+  source: string;
+  created_at: string;
+}
+
 export default function AdminPage() {
   const [password, setPassword] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [responses, setResponses] = useState<SurveyResponse[]>([]);
+  const [waitlist, setWaitlist] = useState<WaitlistEntry[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -39,11 +48,18 @@ export default function AdminPage() {
         return;
       }
 
-      const dataRes = await fetch('/api/admin/responses', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password }),
-      });
+      const [dataRes, waitlistRes] = await Promise.all([
+        fetch('/api/admin/responses', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password }),
+        }),
+        fetch('/api/admin/waitlist', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password }),
+        }),
+      ]);
 
       if (!dataRes.ok) {
         setError('Failed to fetch responses');
@@ -53,6 +69,12 @@ export default function AdminPage() {
 
       const data = await dataRes.json();
       setResponses(data.responses);
+
+      if (waitlistRes.ok) {
+        const waitlistData = await waitlistRes.json();
+        setWaitlist(waitlistData.entries || []);
+      }
+
       setIsAuthenticated(true);
     } catch {
       setError('Something went wrong');
@@ -115,6 +137,35 @@ export default function AdminPage() {
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
     link.href = url;
     link.download = `${personaId}_${timestamp}.csv`;
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const exportWaitlistToCsv = () => {
+    if (waitlist.length === 0) return;
+
+    const headers = ['ID', 'Name', 'Email', 'Source', 'Signed Up'];
+    const rows = waitlist.map((entry) => [
+      entry.id,
+      entry.name,
+      entry.email,
+      entry.source,
+      new Date(entry.created_at).toLocaleString(),
+    ]);
+
+    const csvContent = [
+      headers.map((h) => `"${h.replace(/"/g, '""')}"`).join(','),
+      ...rows.map((row) =>
+        row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(',')
+      ),
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+    link.href = url;
+    link.download = `waitlist_${timestamp}.csv`;
     link.click();
     URL.revokeObjectURL(url);
   };
@@ -247,6 +298,60 @@ export default function AdminPage() {
               </section>
             );
           })}
+
+          {/* Waitlist Section */}
+          <section className="space-y-4 pt-8 border-t border-white/10">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-xl font-medium">Waitlist Signups</h2>
+                <p className="text-sm text-zinc-400">
+                  {waitlist.length} signups
+                </p>
+              </div>
+              {waitlist.length > 0 && (
+                <button
+                  onClick={exportWaitlistToCsv}
+                  className="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors text-sm font-medium"
+                >
+                  Download CSV
+                </button>
+              )}
+            </div>
+
+            {waitlist.length === 0 ? (
+              <div className="p-6 rounded-xl border border-white/10 text-center text-zinc-500">
+                No waitlist signups yet
+              </div>
+            ) : (
+              <div className="overflow-x-auto rounded-xl border border-white/10">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-white/10 bg-white/5">
+                      <th className="px-4 py-3 text-left font-medium">Name</th>
+                      <th className="px-4 py-3 text-left font-medium">Email</th>
+                      <th className="px-4 py-3 text-left font-medium">Source</th>
+                      <th className="px-4 py-3 text-left font-medium">Signed Up</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {waitlist.map((entry) => (
+                      <tr
+                        key={entry.id}
+                        className="border-b border-white/5 hover:bg-white/5"
+                      >
+                        <td className="px-4 py-3">{entry.name}</td>
+                        <td className="px-4 py-3 text-zinc-400">{entry.email}</td>
+                        <td className="px-4 py-3 text-zinc-400">{entry.source}</td>
+                        <td className="px-4 py-3 text-zinc-400">
+                          {new Date(entry.created_at).toLocaleDateString()}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </section>
         </div>
       </div>
     </main>

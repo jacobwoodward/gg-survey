@@ -41,3 +41,28 @@ export async function getSurveyResponses(): Promise<SurveyResponse[]> {
   `;
   return result.rows as SurveyResponse[];
 }
+
+// Waitlist functions
+export interface WaitlistEntry {
+  id?: number;
+  name: string;
+  email: string;
+  source?: string;
+  created_at?: Date;
+}
+
+export async function saveWaitlistEntry(data: WaitlistEntry): Promise<number> {
+  const result = await sql`
+    INSERT INTO waitlist (name, email, source)
+    VALUES (${data.name}, ${data.email}, ${data.source || 'students'})
+    RETURNING id
+  `;
+  return result.rows[0].id;
+}
+
+export async function getWaitlistEntries(): Promise<WaitlistEntry[]> {
+  const result = await sql`
+    SELECT * FROM waitlist ORDER BY created_at DESC
+  `;
+  return result.rows as WaitlistEntry[];
+}
