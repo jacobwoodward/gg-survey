@@ -3,10 +3,10 @@
 import { useState } from 'react';
 
 interface WaitlistFormProps {
-  source?: string;
+  persona?: string;
 }
 
-export default function WaitlistForm({ source = 'students' }: WaitlistFormProps) {
+export default function WaitlistForm({ persona }: WaitlistFormProps) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
@@ -28,7 +28,7 @@ export default function WaitlistForm({ source = 'students' }: WaitlistFormProps)
       const res = await fetch('/api/waitlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, source }),
+        body: JSON.stringify({ name, email, persona }),
       });
 
       if (!res.ok) {
@@ -69,7 +69,7 @@ export default function WaitlistForm({ source = 'students' }: WaitlistFormProps)
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 w-full max-w-md">
+    <form onSubmit={handleSubmit} className="space-y-6 w-full">
       {status === 'error' && (
         <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
           {errorMessage}

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, Suspense } from 'react';
+import Link from 'next/link';
 import Modal from '@/components/Modal';
 import Survey from '@/components/Survey';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -8,7 +9,6 @@ import { useRouter, useSearchParams } from 'next/navigation';
 function HomeContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [isSurveyOpen, setIsSurveyOpen] = useState(false);
   const [initialPersonaId, setInitialPersonaId] = useState<string | undefined>(undefined);
 
@@ -58,8 +58,8 @@ function HomeContent() {
           {/* Options */}
           <div className="flex flex-col sm:flex-row items-center gap-6 pt-8">
             {/* Schedule Interview */}
-            <button
-              onClick={() => setIsCalendarOpen(true)}
+            <Link
+              href="/schedule"
               className="group relative p-6 rounded-2xl bg-zinc-800/50 border border-white/10 hover:border-white/20 hover:bg-zinc-800 transition-all text-left w-full sm:flex-1"
             >
               <div className="space-y-3">
@@ -100,7 +100,7 @@ function HomeContent() {
                   />
                 </svg>
               </div>
-            </button>
+            </Link>
 
             {/* OR Divider */}
             <div className="flex items-center gap-4 sm:flex-col sm:gap-2">
@@ -161,22 +161,6 @@ function HomeContent() {
           </p>
         </div>
       </div>
-
-      {/* Calendar Modal */}
-      <Modal
-        isOpen={isCalendarOpen}
-        onClose={() => setIsCalendarOpen(false)}
-        title="Schedule a conversation"
-        variant="light"
-      >
-        <iframe
-          src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0gEUykFPHy1ULvd7qrbnvAbv3chwoAT6ici7NXQhEqH2gcmWEcgQRHcOHQBz2c9eCLAmJA7yQe?gv=true"
-          style={{ border: 0 }}
-          width="100%"
-          height="600"
-          frameBorder="0"
-        />
-      </Modal>
 
       {/* Survey Modal */}
       <Modal

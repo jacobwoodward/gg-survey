@@ -47,14 +47,14 @@ export interface WaitlistEntry {
   id?: number;
   name: string;
   email: string;
-  source?: string;
+  persona?: string;
   created_at?: Date;
 }
 
 export async function saveWaitlistEntry(data: WaitlistEntry): Promise<number> {
   const result = await sql`
-    INSERT INTO waitlist (name, email, source)
-    VALUES (${data.name}, ${data.email}, ${data.source || 'students'})
+    INSERT INTO waitlist (name, email, persona)
+    VALUES (${data.name}, ${data.email}, ${data.persona || null})
     RETURNING id
   `;
   return result.rows[0].id;
@@ -65,4 +65,34 @@ export async function getWaitlistEntries(): Promise<WaitlistEntry[]> {
     SELECT * FROM waitlist ORDER BY created_at DESC
   `;
   return result.rows as WaitlistEntry[];
+}
+
+// Persona Settings functions
+export interface PersonaSetting {
+  id?: number;
+  persona_id: string;
+  scheduling_enabled: boolean;
+  updated_at?: Date;
+}
+
+export async function getPersonaSettings(): Promise<PersonaSetting[]> {
+  const result = await sql`
+    SELECT * FROM persona_settings ORDER BY persona_id
+  `;
+  return result.rows as PersonaSetting[];
+}
+
+export async function updatePersonaSetting(personaId: string, schedulingEnabled: boolean): Promise<void> {
+  await sql`
+    UPDATE persona_settings
+    SET scheduling_enabled = ${schedulingEnabled}, updated_at = CURRENT_TIMESTAMP
+    WHERE persona_id = ${personaId}
+  `;
+}
+
+export async function getPersonaSetting(personaId: string): Promise<PersonaSetting | null> {
+  const result = await sql`
+    SELECT * FROM persona_settings WHERE persona_id = ${personaId}
+  `;
+  return result.rows[0] as PersonaSetting || null;
 }

@@ -3,7 +3,7 @@ import { saveWaitlistEntry } from '@/lib/db';
 
 export async function POST(request: NextRequest) {
   try {
-    const { name, email, source } = await request.json();
+    const { name, email, persona } = await request.json();
 
     if (!name || !email) {
       return NextResponse.json(
@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const id = await saveWaitlistEntry({ name, email, source });
+    const id = await saveWaitlistEntry({ name, email, persona });
     return NextResponse.json({ success: true, id });
   } catch (error) {
     console.error('Error saving waitlist entry:', error);

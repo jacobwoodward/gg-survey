@@ -18,8 +18,13 @@ interface WaitlistEntry {
   id: number;
   name: string;
   email: string;
-  source: string;
+  persona?: string;
   created_at: string;
+}
+
+interface PersonaSetting {
+  persona_id: string;
+  scheduling_enabled: boolean;
 }
 
 export default function AdminPage() {
@@ -27,8 +32,10 @@ export default function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [responses, setResponses] = useState<SurveyResponse[]>([]);
   const [waitlist, setWaitlist] = useState<WaitlistEntry[]>([]);
+  const [personaSettings, setPersonaSettings] = useState<PersonaSetting[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [savingSettings, setSavingSettings] = useState<string | null>(null);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -48,13 +55,18 @@ export default function AdminPage() {
         return;
       }
 
-      const [dataRes, waitlistRes] = await Promise.all([
+      const [dataRes, waitlistRes, settingsRes] = await Promise.all([
         fetch('/api/admin/responses', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ password }),
         }),
         fetch('/api/admin/waitlist', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password }),
+        }),
+        fetch('/api/admin/settings', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ password }),
@@ -75,12 +87,51 @@ export default function AdminPage() {
         setWaitlist(waitlistData.entries || []);
       }
 
+      if (settingsRes.ok) {
+        const settingsData = await settingsRes.json();
+        setPersonaSettings(settingsData.settings || []);
+      }
+
       setIsAuthenticated(true);
     } catch {
       setError('Something went wrong');
     } finally {
       setLoading(false);
     }
+  };
+
+  const toggleScheduling = async (personaId: string, currentValue: boolean) => {
+    setSavingSettings(personaId);
+    try {
+      const res = await fetch('/api/admin/settings', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          password,
+          personaId,
+          schedulingEnabled: !currentValue,
+        }),
+      });
+
+      if (res.ok) {
+        setPersonaSettings((prev) =>
+          prev.map((s) =>
+            s.persona_id === personaId
+              ? { ...s, scheduling_enabled: !currentValue }
+              : s
+          )
+        );
+      }
+    } catch (err) {
+      console.error('Failed to update setting:', err);
+    } finally {
+      setSavingSettings(null);
+    }
+  };
+
+  const getSchedulingEnabled = (personaId: string): boolean => {
+    const setting = personaSettings.find((s) => s.persona_id === personaId);
+    return setting?.scheduling_enabled ?? true;
   };
 
   const getResponsesByPersona = (personaId: string) => {
@@ -144,12 +195,12 @@ export default function AdminPage() {
   const exportWaitlistToCsv = () => {
     if (waitlist.length === 0) return;
 
-    const headers = ['ID', 'Name', 'Email', 'Source', 'Signed Up'];
+    const headers = ['ID', 'Name', 'Email', 'Persona', 'Signed Up'];
     const rows = waitlist.map((entry) => [
       entry.id,
       entry.name,
       entry.email,
-      entry.source,
+      entry.persona || '-',
       new Date(entry.created_at).toLocaleString(),
     ]);
 
@@ -210,7 +261,50 @@ export default function AdminPage() {
     <main className="min-h-screen p-6">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-8">
-          <h1 className="text-2xl font-medium">Survey Responses</h1>
+          <h1 className="text-2xl font-medium">Admin Dashboard</h1>
+        </div>
+
+        {/* Scheduling Settings */}
+        <section className="mb-12 p-6 rounded-xl border border-white/10 bg-white/5">
+          <h2 className="text-xl font-medium mb-4">Scheduling Settings</h2>
+          <p className="text-sm text-zinc-400 mb-6">
+            Toggle scheduling availability for each persona. When disabled, users will see the waitlist signup form instead.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {personas.map((persona) => {
+              const isEnabled = getSchedulingEnabled(persona.id);
+              const isSaving = savingSettings === persona.id;
+              return (
+                <div
+                  key={persona.id}
+                  className="flex items-center justify-between p-4 rounded-lg border border-white/10 bg-white/5"
+                >
+                  <div>
+                    <p className="font-medium">{persona.title}</p>
+                    <p className="text-xs text-zinc-500">{persona.id}</p>
+                  </div>
+                  <button
+                    onClick={() => toggleScheduling(persona.id, isEnabled)}
+                    disabled={isSaving}
+                    className={`relative w-12 h-6 rounded-full transition-colors ${
+                      isEnabled ? 'bg-green-500' : 'bg-zinc-600'
+                    } ${isSaving ? 'opacity-50' : ''}`}
+                  >
+                    <span
+                      className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform ${
+                        isEnabled ? 'translate-x-6' : 'translate-x-0'
+                      }`}
+                    />
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* Survey Responses Header */}
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="text-xl font-medium">Survey Responses</h2>
           <p className="text-zinc-400">{responses.length} total responses</p>
         </div>
 
@@ -329,7 +423,7 @@ export default function AdminPage() {
                     <tr className="border-b border-white/10 bg-white/5">
                       <th className="px-4 py-3 text-left font-medium">Name</th>
                       <th className="px-4 py-3 text-left font-medium">Email</th>
-                      <th className="px-4 py-3 text-left font-medium">Source</th>
+                      <th className="px-4 py-3 text-left font-medium">Persona</th>
                       <th className="px-4 py-3 text-left font-medium">Signed Up</th>
                     </tr>
                   </thead>
@@ -341,7 +435,7 @@ export default function AdminPage() {
                       >
                         <td className="px-4 py-3">{entry.name}</td>
                         <td className="px-4 py-3 text-zinc-400">{entry.email}</td>
-                        <td className="px-4 py-3 text-zinc-400">{entry.source}</td>
+                        <td className="px-4 py-3 text-zinc-400">{entry.persona || '-'}</td>
                         <td className="px-4 py-3 text-zinc-400">
                           {new Date(entry.created_at).toLocaleDateString()}
                         </td>
