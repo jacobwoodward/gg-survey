@@ -1,11 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import Modal from '@/components/Modal';
 import Survey from '@/components/Survey';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-export default function Home() {
+function HomeContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
@@ -189,5 +189,13 @@ export default function Home() {
         </div>
       </Modal>
     </main>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div className="min-h-screen" />}>
+      <HomeContent />
+    </Suspense>
   );
 }

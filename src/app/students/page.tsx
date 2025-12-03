@@ -1,5 +1,3 @@
-import { headers } from 'next/headers';
-
 async function getStudentPageEnabled() {
   // Access environment variable at runtime
   return process.env.STUDENT_PAGE !== 'OFF';
