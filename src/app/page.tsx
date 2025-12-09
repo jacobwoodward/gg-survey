@@ -1,10 +1,12 @@
 'use client';
 
 import { useState, useEffect, Suspense } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import Modal from '@/components/Modal';
 import Survey from '@/components/Survey';
 import { useRouter, useSearchParams } from 'next/navigation';
+import giftcardImage from '@/images/giftcard.png';
 
 function HomeContent() {
   const router = useRouter();
@@ -40,7 +42,7 @@ function HomeContent() {
             </p>
           </div>
 
-          {/* Gift Card Promo - Commented out for now
+          {/* Gift Card Promo */}
           <div className="flex items-center justify-center gap-4 p-4 rounded-2xl bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-500/20">
             <Image
               src={giftcardImage}
@@ -50,10 +52,9 @@ function HomeContent() {
               className="rounded-lg shadow-lg"
             />
             <p className="text-sm sm:text-base text-amber-200/90">
-              We&apos;re giving away a <span className="font-semibold text-amber-100">$50 Amazon Gift Card</span> to one lucky respondent
+              I&apos;m giving away a <span className="font-semibold text-amber-100">$50 Amazon Gift Card</span> to one lucky respondent
             </p>
           </div>
-          */}
 
           {/* Options */}
           <div className="flex flex-col sm:flex-row items-center gap-6 pt-8">
