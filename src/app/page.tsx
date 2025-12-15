@@ -52,7 +52,7 @@ function HomeContent() {
               className="rounded-lg shadow-lg"
             />
             <p className="text-sm sm:text-base text-amber-200/90">
-              I&apos;m giving away a <span className="font-semibold text-amber-100">$50 Amazon Gift Card</span> to one lucky respondent
+              Schedule an interview and you&apos;ll be entered to win a <span className="font-semibold text-amber-100">$50 Amazon Gift Card</span>
             </p>
           </div>
 
