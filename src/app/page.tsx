@@ -43,7 +43,7 @@ function HomeContent() {
           </div>
 
           {/* Gift Card Promo */}
-          <div className="flex items-center justify-center gap-4 p-4 rounded-2xl bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-500/20">
+          <div className="flex items-center justify-center gap-4 p-4 rounded-2xl bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-500/20 max-w-[70%] mx-auto">
             <Image
               src={giftcardImage}
               alt="$50 Amazon Gift Card"
@@ -52,7 +52,7 @@ function HomeContent() {
               className="rounded-lg shadow-lg"
             />
             <p className="text-sm sm:text-base text-amber-200/90">
-              Schedule an interview and you&apos;ll be entered to win a <span className="font-semibold text-amber-100">$50 Amazon Gift Card</span>
+              Schedule a conversation and you&apos;ll be entered to win a <span className="font-semibold text-amber-100">$50 Amazon Gift Card</span>
             </p>
           </div>
 
