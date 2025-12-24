@@ -477,7 +477,7 @@ export default function InterviewInsightsReport() {
             </span>
           </li>
           <li className="p-3 rounded-lg bg-black/30">
-            <span className="font-medium text-white">Voardy AI</span>
+            <span className="font-medium text-white">Boardy AI</span>
             <span className="text-zinc-400 ml-2 text-sm">
               - WhatsApp-based professional networking tool.
             </span>
