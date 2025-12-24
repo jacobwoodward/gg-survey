@@ -9,7 +9,7 @@ export default function InterviewInsightsReport() {
         <p className="text-zinc-300 leading-relaxed">
           This report synthesizes insights from <strong>19 in-depth interviews</strong> conducted with diverse stakeholders
           including students, early-career professionals, experienced professionals, recruiters, entrepreneurs, and
-          international job seekers. The interviews reveal a deeply broken professional networking and job search
+          job seekers. The interviews reveal a deeply broken professional networking and job search
           ecosystem where traditional methods have become ineffective, AI has created new barriers, and meaningful
           human connections have been replaced by performative interactions.
         </p>
