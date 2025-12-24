@@ -686,17 +686,458 @@ export default function InterviewInsightsReport() {
         </div>
       </section>
 
+      {/* Survey Results Section */}
+      <section className="mb-12">
+        <h2 className="text-2xl font-bold mb-6 text-white">Survey Response Analysis</h2>
+        <p className="text-zinc-300 mb-6">
+          In addition to qualitative interviews, <strong>17 survey responses</strong> were collected across 5 personas,
+          providing quantitative validation of the themes identified in interviews.
+        </p>
+
+        {/* Survey Overview Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-8">
+          <div className="p-4 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-center">
+            <p className="text-2xl font-bold text-emerald-400">6</p>
+            <p className="text-xs text-zinc-400">Students</p>
+          </div>
+          <div className="p-4 rounded-lg bg-blue-500/10 border border-blue-500/20 text-center">
+            <p className="text-2xl font-bold text-blue-400">1</p>
+            <p className="text-xs text-zinc-400">Mentors</p>
+          </div>
+          <div className="p-4 rounded-lg bg-amber-500/10 border border-amber-500/20 text-center">
+            <p className="text-2xl font-bold text-amber-400">3</p>
+            <p className="text-xs text-zinc-400">Employers</p>
+          </div>
+          <div className="p-4 rounded-lg bg-purple-500/10 border border-purple-500/20 text-center">
+            <p className="text-2xl font-bold text-purple-400">1</p>
+            <p className="text-xs text-zinc-400">Coaches</p>
+          </div>
+          <div className="p-4 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-center">
+            <p className="text-2xl font-bold text-cyan-400">6</p>
+            <p className="text-xs text-zinc-400">General</p>
+          </div>
+        </div>
+
+        {/* Student Survey Insights */}
+        <div className="mb-8 p-6 rounded-xl border border-white/10 bg-white/5">
+          <h3 className="text-xl font-semibold mb-4 text-emerald-400">Student/Early-Career Survey Results (n=6)</h3>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h4 className="font-medium text-white mb-3">Job Search Experience</h4>
+              <div className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-zinc-400">Frustrating - very few responses</span>
+                  <span className="text-emerald-400 font-medium">67%</span>
+                </div>
+                <div className="w-full bg-white/10 rounded-full h-2">
+                  <div className="bg-emerald-500 h-2 rounded-full" style={{width: '67%'}}></div>
+                </div>
+                <div className="flex justify-between items-center mt-2">
+                  <span className="text-sm text-zinc-400">Exhausting - shouting into void</span>
+                  <span className="text-emerald-400 font-medium">17%</span>
+                </div>
+                <div className="w-full bg-white/10 rounded-full h-2">
+                  <div className="bg-emerald-500 h-2 rounded-full" style={{width: '17%'}}></div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="font-medium text-white mb-3">Application Volume (3 months)</h4>
+              <div className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-zinc-400">More than 100 applications</span>
+                  <span className="text-emerald-400 font-medium">33%</span>
+                </div>
+                <div className="w-full bg-white/10 rounded-full h-2">
+                  <div className="bg-emerald-500 h-2 rounded-full" style={{width: '33%'}}></div>
+                </div>
+                <div className="flex justify-between items-center mt-2">
+                  <span className="text-sm text-zinc-400">51-100 applications</span>
+                  <span className="text-emerald-400 font-medium">33%</span>
+                </div>
+                <div className="w-full bg-white/10 rounded-full h-2">
+                  <div className="bg-emerald-500 h-2 rounded-full" style={{width: '33%'}}></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-6">
+            <h4 className="font-medium text-white mb-3">Most Frustrating Challenges (Multi-select)</h4>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div className="p-3 rounded-lg bg-black/30">
+                <div className="flex justify-between">
+                  <span className="text-sm text-zinc-300">Applications disappear into black hole</span>
+                  <span className="text-emerald-400 font-medium">83%</span>
+                </div>
+              </div>
+              <div className="p-3 rounded-lg bg-black/30">
+                <div className="flex justify-between">
+                  <span className="text-sm text-zinc-300">Don&apos;t know the right people</span>
+                  <span className="text-emerald-400 font-medium">67%</span>
+                </div>
+              </div>
+              <div className="p-3 rounded-lg bg-black/30">
+                <div className="flex justify-between">
+                  <span className="text-sm text-zinc-300">Can&apos;t get past automated screening</span>
+                  <span className="text-emerald-400 font-medium">67%</span>
+                </div>
+              </div>
+              <div className="p-3 rounded-lg bg-black/30">
+                <div className="flex justify-between">
+                  <span className="text-sm text-zinc-300">No way to stand out from candidates</span>
+                  <span className="text-emerald-400 font-medium">67%</span>
+                </div>
+              </div>
+              <div className="p-3 rounded-lg bg-black/30">
+                <div className="flex justify-between">
+                  <span className="text-sm text-zinc-300">Unclear what employers want</span>
+                  <span className="text-emerald-400 font-medium">67%</span>
+                </div>
+              </div>
+              <div className="p-3 rounded-lg bg-black/30">
+                <div className="flex justify-between">
+                  <span className="text-sm text-zinc-300">Entry-level jobs require experience</span>
+                  <span className="text-emerald-400 font-medium">50%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-center">
+              <p className="text-3xl font-bold text-red-400">9.5/10</p>
+              <p className="text-xs text-zinc-400">Average stress level</p>
+            </div>
+            <div className="p-4 rounded-lg bg-amber-500/10 border border-amber-500/20 text-center">
+              <p className="text-3xl font-bold text-amber-400">83%</p>
+              <p className="text-xs text-zinc-400">Not connected to local professionals</p>
+            </div>
+            <div className="p-4 rounded-lg bg-blue-500/10 border border-blue-500/20 text-center">
+              <p className="text-3xl font-bold text-blue-400">67%</p>
+              <p className="text-xs text-zinc-400">Networking felt awkward</p>
+            </div>
+          </div>
+
+          <div className="mt-6 p-4 rounded-lg bg-black/30">
+            <h4 className="font-medium text-white mb-2">What Would Help Most</h4>
+            <ul className="text-sm text-zinc-400 space-y-1">
+              <li>&bull; <strong className="text-zinc-300">Connections to people who can refer me</strong> - Top choice</li>
+              <li>&bull; Better resume/application optimization</li>
+              <li>&bull; Mentorship from people in target field</li>
+              <li>&bull; Visibility into companies actually hiring</li>
+            </ul>
+          </div>
+
+          <div className="mt-6 p-4 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
+            <h4 className="font-medium text-white mb-2">Notable Student Quote</h4>
+            <blockquote className="text-sm text-zinc-300 italic">
+              &quot;I come from a blue collar family in a small town with no connections to any industry I&apos;d like to work in.
+              Networking at school hasn&apos;t worked very well... It seems like I need to make more contacts outside of my school
+              but I&apos;m not sure where to start, and it all feels like too little too late as I&apos;m a senior now.&quot;
+              <span className="text-zinc-500 block mt-1">— Aaron Radliff, UB Student</span>
+            </blockquote>
+          </div>
+        </div>
+
+        {/* Employer Survey Insights */}
+        <div className="mb-8 p-6 rounded-xl border border-white/10 bg-white/5">
+          <h3 className="text-xl font-semibold mb-4 text-amber-400">Employer/Hiring Manager Survey Results (n=3)</h3>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h4 className="font-medium text-white mb-3">Hardest Part of Hiring</h4>
+              <div className="space-y-2">
+                <div className="p-3 rounded-lg bg-black/30">
+                  <span className="text-sm text-zinc-300">Too many unqualified applicants to filter</span>
+                  <span className="text-amber-400 font-medium ml-2">67%</span>
+                </div>
+                <div className="p-3 rounded-lg bg-black/30">
+                  <span className="text-sm text-zinc-300">Hard to assess culture fit before hiring</span>
+                  <span className="text-amber-400 font-medium ml-2">67%</span>
+                </div>
+                <div className="p-3 rounded-lg bg-black/30">
+                  <span className="text-sm text-zinc-300">Don&apos;t have visibility into local talent</span>
+                  <span className="text-amber-400 font-medium ml-2">67%</span>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="font-medium text-white mb-3">Application Volume per Role</h4>
+              <div className="space-y-2">
+                <div className="p-3 rounded-lg bg-black/30">
+                  <span className="text-sm text-zinc-300">More than 250 applications</span>
+                  <span className="text-amber-400 font-medium ml-2">33%</span>
+                </div>
+                <div className="p-3 rounded-lg bg-black/30">
+                  <span className="text-sm text-zinc-300">101-250 applications</span>
+                  <span className="text-amber-400 font-medium ml-2">33%</span>
+                </div>
+                <div className="p-3 rounded-lg bg-black/30">
+                  <span className="text-sm text-zinc-300">51-100 applications</span>
+                  <span className="text-amber-400 font-medium ml-2">33%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-center">
+              <p className="text-3xl font-bold text-red-400">100%</p>
+              <p className="text-xs text-zinc-400">Have made bad hires that looked great on paper</p>
+            </div>
+            <div className="p-4 rounded-lg bg-green-500/10 border border-green-500/20 text-center">
+              <p className="text-3xl font-bold text-green-400">8.3/10</p>
+              <p className="text-xs text-zinc-400">Value of reducing bad hires by 20%</p>
+            </div>
+            <div className="p-4 rounded-lg bg-blue-500/10 border border-blue-500/20 text-center">
+              <p className="text-3xl font-bold text-blue-400">4.3/5</p>
+              <p className="text-xs text-zinc-400">Interest in warm intros vs cold apps</p>
+            </div>
+          </div>
+
+          <div className="mt-6 p-4 rounded-lg bg-black/30">
+            <h4 className="font-medium text-white mb-2">Key Employer Insights</h4>
+            <ul className="text-sm text-zinc-400 space-y-1">
+              <li>&bull; <strong className="text-zinc-300">Referrals are primary source of good hires</strong> for 33% of employers</li>
+              <li>&bull; All employers interested in seeing candidate growth trajectory over time</li>
+              <li>&bull; Strong preference for warm introductions (4.3/5 average)</li>
+              <li>&bull; 100% use LinkedIn/LinkedIn Recruiter as a recruiting tool</li>
+            </ul>
+          </div>
+
+          <div className="mt-6 p-4 rounded-lg bg-amber-500/10 border border-amber-500/20">
+            <h4 className="font-medium text-white mb-2">Notable Employer Quote</h4>
+            <blockquote className="text-sm text-zinc-300 italic">
+              &quot;Sorting through AI noise / getting to real signal quickly.&quot;
+              <span className="text-zinc-500 block mt-1">— Nick Branholm, 43North Portfolio Talent Lead</span>
+            </blockquote>
+          </div>
+        </div>
+
+        {/* General Professional Survey Insights */}
+        <div className="mb-8 p-6 rounded-xl border border-white/10 bg-white/5">
+          <h3 className="text-xl font-semibold mb-4 text-cyan-400">General Professional Survey Results (n=6)</h3>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h4 className="font-medium text-white mb-3">LinkedIn Relationship</h4>
+              <div className="space-y-2">
+                <div className="p-3 rounded-lg bg-black/30">
+                  <span className="text-sm text-zinc-300">&quot;Feels performative&quot;</span>
+                  <span className="text-cyan-400 font-medium ml-2">67%</span>
+                </div>
+                <div className="p-3 rounded-lg bg-black/30">
+                  <span className="text-sm text-zinc-300">Use it actively and find value</span>
+                  <span className="text-cyan-400 font-medium ml-2">33%</span>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="font-medium text-white mb-3">Professional Community Feeling</h4>
+              <div className="space-y-2">
+                <div className="p-3 rounded-lg bg-black/30">
+                  <span className="text-sm text-zinc-300">Somewhat connected / loose network</span>
+                  <span className="text-cyan-400 font-medium ml-2">50%</span>
+                </div>
+                <div className="p-3 rounded-lg bg-black/30">
+                  <span className="text-sm text-zinc-300">Strongly connected</span>
+                  <span className="text-cyan-400 font-medium ml-2">33%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-4 rounded-lg bg-blue-500/10 border border-blue-500/20 text-center">
+              <p className="text-3xl font-bold text-blue-400">4.5/5</p>
+              <p className="text-xs text-zinc-400">Interest in local professional connections</p>
+            </div>
+            <div className="p-4 rounded-lg bg-green-500/10 border border-green-500/20 text-center">
+              <p className="text-3xl font-bold text-green-400">83%</p>
+              <p className="text-xs text-zinc-400">Have gotten opportunities through local connections</p>
+            </div>
+            <div className="p-4 rounded-lg bg-purple-500/10 border border-purple-500/20 text-center">
+              <p className="text-3xl font-bold text-purple-400">4.2/5</p>
+              <p className="text-xs text-zinc-400">Interest in text/calendar-based networking</p>
+            </div>
+          </div>
+
+          <div className="mt-6">
+            <h4 className="font-medium text-white mb-3">What Would Make Them Engage with a New Tool</h4>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div className="p-3 rounded-lg bg-black/30">
+                <span className="text-sm text-zinc-300">If it was local to my area</span>
+                <span className="text-cyan-400 font-medium ml-2">83%</span>
+              </div>
+              <div className="p-3 rounded-lg bg-black/30">
+                <span className="text-sm text-zinc-300">If it helped me find opportunities</span>
+                <span className="text-cyan-400 font-medium ml-2">67%</span>
+              </div>
+              <div className="p-3 rounded-lg bg-black/30">
+                <span className="text-sm text-zinc-300">Connected me with people I actually want to meet</span>
+                <span className="text-cyan-400 font-medium ml-2">50%</span>
+              </div>
+              <div className="p-3 rounded-lg bg-black/30">
+                <span className="text-sm text-zinc-300">If it helped me give back / mentor</span>
+                <span className="text-cyan-400 font-medium ml-2">50%</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-6 p-4 rounded-lg bg-cyan-500/10 border border-cyan-500/20">
+            <h4 className="font-medium text-white mb-2">Notable General Professional Quotes</h4>
+            <div className="space-y-3">
+              <blockquote className="text-sm text-zinc-300 italic">
+                &quot;People who have jobs are not as willing to help those who do not anymore. Perhaps for fear of
+                jeopardizing their own jobs, but they are apathetic to our situation. I am also finding that I am
+                more qualified than the majority of the hiring managers for the jobs in which I am applying.&quot;
+                <span className="text-zinc-500 block mt-1">— Tameka Barber</span>
+              </blockquote>
+              <blockquote className="text-sm text-zinc-300 italic">
+                &quot;Job market is so broken right now. We all feel like we are just shouting into the void. We get picked
+                up by AI bots who then read our AI updated resumes and media profiles, who then use AI bots to submit
+                to hiring managers who use AI to auto-reject based on a keyword missing.&quot;
+                <span className="text-zinc-500 block mt-1">— Richard Kenyan, Infrastructure Engineer</span>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+
+        {/* Mentor & Coach Insights */}
+        <div className="mb-8 p-6 rounded-xl border border-white/10 bg-white/5">
+          <h3 className="text-xl font-semibold mb-4 text-purple-400">Mentor & Coach Survey Results (n=2)</h3>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="p-4 rounded-lg bg-black/30">
+              <h4 className="font-medium text-white mb-2">Mentor Profile (Stelios)</h4>
+              <ul className="text-sm text-zinc-400 space-y-1">
+                <li>&bull; Actively mentors people regularly</li>
+                <li>&bull; Motivated by watching others grow and succeed</li>
+                <li>&bull; Blocker: Doesn&apos;t know how to find people who need help</li>
+                <li>&bull; Would give 3-5 hours/month if matching was effortless</li>
+                <li>&bull; <strong className="text-purple-400">5/5</strong> interest in automatic matching platform</li>
+                <li>&bull; <strong className="text-purple-400">5/5</strong> comfort with automated text intros</li>
+              </ul>
+              <p className="text-sm text-zinc-300 italic mt-3">
+                &quot;Society feels broken and what&apos;s missing is trust.&quot;
+              </p>
+            </div>
+
+            <div className="p-4 rounded-lg bg-black/30">
+              <h4 className="font-medium text-white mb-2">Coach Profile (Dr. Amin Sanaia)</h4>
+              <ul className="text-sm text-zinc-400 space-y-1">
+                <li>&bull; Executive, career, and business coaching</li>
+                <li>&bull; Finding clients is a constant struggle</li>
+                <li>&bull; Primary method: Networking events & referrals</li>
+                <li>&bull; Hardest challenge: Finding qualified leads</li>
+                <li>&bull; Spends $250-500/month on tools</li>
+                <li>&bull; <strong className="text-purple-400">8/10</strong> interest in automated progress tracking</li>
+              </ul>
+              <p className="text-sm text-zinc-300 italic mt-3">
+                &quot;Finding genuine people that want to help/support and reciprocate and not just want to use you.&quot;
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* WhatsApp Adoption */}
+        <div className="p-6 rounded-xl border border-white/10 bg-white/5">
+          <h3 className="text-xl font-semibold mb-4 text-green-400">WhatsApp Adoption Across All Respondents</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-4 rounded-lg bg-green-500/10 border border-green-500/20 text-center">
+              <p className="text-3xl font-bold text-green-400">65%</p>
+              <p className="text-xs text-zinc-400">Currently use WhatsApp</p>
+            </div>
+            <div className="p-4 rounded-lg bg-amber-500/10 border border-amber-500/20 text-center">
+              <p className="text-3xl font-bold text-amber-400">29%</p>
+              <p className="text-xs text-zinc-400">&quot;Would if there was a good reason&quot;</p>
+            </div>
+            <div className="p-4 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-center">
+              <p className="text-3xl font-bold text-emerald-400">94%</p>
+              <p className="text-xs text-zinc-400">Would use or open to using WhatsApp</p>
+            </div>
+          </div>
+          <p className="text-sm text-zinc-400 mt-4">
+            This validates WhatsApp as the optimal platform for a UI-free professional networking solution,
+            with near-universal adoption or openness across all personas.
+          </p>
+        </div>
+      </section>
+
+      {/* Key Survey Takeaways */}
+      <section className="mb-12 p-6 rounded-xl border border-emerald-500/20 bg-emerald-500/5">
+        <h2 className="text-2xl font-bold mb-4 text-emerald-400">Survey Data: Key Validation Points</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <h3 className="font-semibold text-white mb-3">Pain Points Validated</h3>
+            <ul className="text-sm text-zinc-400 space-y-2">
+              <li className="flex items-start gap-2">
+                <span className="text-emerald-400">✓</span>
+                <span>Applications disappearing into &quot;black holes&quot; is the #1 frustration (83% of students)</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-emerald-400">✓</span>
+                <span>Extreme stress levels among job seekers (9.5/10 average)</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-emerald-400">✓</span>
+                <span>LinkedIn widely seen as &quot;performative&quot; (67% of general professionals)</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-emerald-400">✓</span>
+                <span>100% of employers have made bad hires that looked great on paper</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-emerald-400">✓</span>
+                <span>Employers struggle with &quot;AI noise&quot; and signal detection</span>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="font-semibold text-white mb-3">Solution Interest Validated</h3>
+            <ul className="text-sm text-zinc-400 space-y-2">
+              <li className="flex items-start gap-2">
+                <span className="text-emerald-400">✓</span>
+                <span>Strong interest in local connections (4.5/5 average, 83% see value)</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-emerald-400">✓</span>
+                <span>High interest in warm introductions vs cold applications (4.3/5 employers)</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-emerald-400">✓</span>
+                <span>94% already use or would use WhatsApp</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-emerald-400">✓</span>
+                <span>Interest in text/calendar-based networking (4.2/5 average)</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-emerald-400">✓</span>
+                <span>Mentors want to help but need better matching (5/5 interest)</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
       {/* Methodology Note */}
       <section className="p-6 rounded-xl border border-white/10 bg-white/5">
         <h2 className="text-xl font-bold mb-4 text-white">Methodology</h2>
         <p className="text-zinc-400 text-sm mb-4">
-          This report synthesizes qualitative data from 19 semi-structured interviews conducted in December 2024.
-          Interviews ranged from 15-60 minutes and covered professional backgrounds, current job search/networking
-          experiences, pain points with existing platforms, and openness to new solutions.
+          This report synthesizes qualitative data from 19 semi-structured interviews conducted in December 2024,
+          plus quantitative survey data from 17 respondents across 5 personas. Interviews ranged from 15-60 minutes
+          and covered professional backgrounds, current job search/networking experiences, pain points with existing
+          platforms, and openness to new solutions.
         </p>
         <p className="text-zinc-400 text-sm">
-          <strong className="text-white">Interviewee demographics:</strong> Students (both domestic and international),
-          early-career professionals, experienced professionals, recruiters, entrepreneurs, and consultants primarily
+          <strong className="text-white">Participant demographics:</strong> Students (both domestic and international),
+          early-career professionals, experienced professionals, recruiters, entrepreneurs, coaches, and consultants primarily
           from the Western New York region with some national/international participants.
         </p>
       </section>
