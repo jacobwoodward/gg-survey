@@ -2,6 +2,9 @@
 
 import { useState } from 'react';
 import { personas } from '@/lib/questions';
+import InterviewInsightsReport from '@/components/InterviewInsightsReport';
+
+type AdminTab = 'dashboard' | 'report';
 
 interface SurveyResponse {
   id: number;
@@ -36,6 +39,7 @@ export default function AdminPage() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [savingSettings, setSavingSettings] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<AdminTab>('dashboard');
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -262,8 +266,41 @@ export default function AdminPage() {
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-2xl font-medium">Admin Dashboard</h1>
+          {/* Tab Navigation */}
+          <div className="flex gap-2">
+            <button
+              onClick={() => setActiveTab('dashboard')}
+              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                activeTab === 'dashboard'
+                  ? 'bg-white text-black'
+                  : 'bg-white/10 hover:bg-white/20 text-white'
+              }`}
+            >
+              Dashboard
+            </button>
+            <button
+              onClick={() => setActiveTab('report')}
+              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                activeTab === 'report'
+                  ? 'bg-white text-black'
+                  : 'bg-white/10 hover:bg-white/20 text-white'
+              }`}
+            >
+              Interview Insights Report
+            </button>
+          </div>
         </div>
 
+        {/* Report Tab Content */}
+        {activeTab === 'report' && (
+          <section className="mb-12">
+            <InterviewInsightsReport />
+          </section>
+        )}
+
+        {/* Dashboard Tab Content */}
+        {activeTab === 'dashboard' && (
+          <>
         {/* Scheduling Settings */}
         <section className="mb-12 p-6 rounded-xl border border-white/10 bg-white/5">
           <h2 className="text-xl font-medium mb-4">Scheduling Settings</h2>
@@ -447,6 +484,8 @@ export default function AdminPage() {
             )}
           </section>
         </div>
+          </>
+        )}
       </div>
     </main>
   );
